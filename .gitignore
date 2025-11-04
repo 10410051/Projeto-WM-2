@@ -1,41 +1,71 @@
-# Dependency directories
+# Node.js
 node_modules/
-.npm/
-.pnp.js
-
-# Build files
-build/
-dist/
-dist-ssr/
-.next/
-.swc/
-
-# Logs
-logs/
-*.log
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
-lerna-debug.log*
-
-# Environment variables
-*.env
-*.env.local
-.*.env
-
-# Editor directories 
-.vscode/*
-!.vscode/extensions.json
-.idea/
-.DS_Store
-*.suo
-*.ntvs*
-*.njsproj
-*.sln
-*.sw?
-
-# Package manager
 package-lock.json
 yarn.lock
-.yarn-integrity   
+pnpm-lock.yaml
+
+# Build output
+.next/
+out/
+dist/
+build/
+
+# Production
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Logs
+logs
+*.log
+*.log.*
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor folders and settings
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# TypeScript
+*.tsbuildinfo
+next-env.d.ts
+
+# Testing
+coverage/
+.nyc_output/
+
+# Misc
+*.swp
+*.swo
+*.bak
+*.tmp
+
+# Optional: ignore Next.js cache (can be large)
+.next/cache/
+
+# Optional: ignore output of static export
+out/
+
+# Optional: if using Turbo Repo
+.turbo/
+
+# Optional: if using Vercel
+.vercel/
+
+# Optional: if using Docker
+docker-compose.override.yml
+.dockerignore
