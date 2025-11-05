@@ -32,7 +32,14 @@ export function ProgramCard({ title, description, image, link }) {
   return (
     <article ref={cardRef} className={`program-card ${isVisible ? "visible" : ""}`}>
       <div className="program-image">
-        <Image src={image || "/placeholder.svg"} alt={title} width={400} height={300} style={{ objectFit: "cover" }} />
+        <Image
+          src={image || "/placeholder.svg"}
+          alt={title}
+          width={400}
+          height={300}
+          style={{ objectFit: "cover" }}
+          unoptimized
+        />
       </div>
       <div className="program-content">
         <h3>{title}</h3>
