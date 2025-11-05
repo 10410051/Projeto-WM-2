@@ -1,7 +1,7 @@
 "use client"
 
 import { HeroSection } from "@/components/hero-section"
-import { ProgramCard } from "@/components/program-card"
+import { ProgramCard } from "@/components/program-cards"
 import { Sidebar } from "@/components/sidebar"
 
 export default function HomePage() {
