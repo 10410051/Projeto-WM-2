@@ -3,82 +3,74 @@
 import { useState } from "react"
 
 export function Sidebar() {
-  const [formData, setFormData] = useState({
-    nome: "",
-    email: "",
-    telefone: "",
-  })
-
-  const handleChange = (e) => {
-    const { name, value } = e.target
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value,
-    }))
-  }
+  const [email, setEmail] = useState("")
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    alert("Informações enviadas! Entraremos em contato em breve.")
-    setFormData({
-      nome: "",
-      email: "",
-      telefone: "",
-    })
+    if (email && email.includes("@")) {
+      alert(`Redirecionando para o portal com o email: ${email}`)
+      console.log("[v0] Portal login:", email)
+      setEmail("")
+    } else {
+      alert("Por favor, insira um email válido.")
+    }
   }
 
   return (
     <aside className="sidebar">
-      <div className="sidebar-card">
-        <h3>Solicite Informações</h3>
-        <form onSubmit={handleSubmit} className="sidebar-form">
-          <div className="form-group">
-            <label htmlFor="sidebar-nome">Nome</label>
-            <input type="text" id="sidebar-nome" name="nome" value={formData.nome} onChange={handleChange} required />
-          </div>
+      <section className="sidebar-section">
+        <header>
+          <h2>
+            <span>🏢</span> Nossa Instituição
+          </h2>
+        </header>
+        <ul className="info-list">
+          <li className="highlight">📍 CAMPUS PRINCIPAL</li>
+          <li>Mais de 30 anos no mercado</li>
+          <li>Mais de 5000 alunos formados</li>
+          <li>Nota máxima no MEC</li>
+          <li>Estrutura moderna e completa</li>
+        </ul>
+      </section>
 
-          <div className="form-group">
-            <label htmlFor="sidebar-email">Email</label>
-            <input
-              type="email"
-              id="sidebar-email"
-              name="email"
-              value={formData.email}
-              onChange={handleChange}
-              required
-            />
-          </div>
+      <section className="sidebar-section">
+        <header>
+          <h2>
+            <span>📞</span> Contato Rápido
+          </h2>
+        </header>
+        <ul className="contact-list">
+          <li>
+            <span>📞</span> (11) 3456-7890
+          </li>
+          <li>
+            <span>📧</span> contato@instituto.edu.br
+          </li>
+          <li>
+            <span>📍</span> Av. Paulista - SP
+          </li>
+        </ul>
+      </section>
 
-          <div className="form-group">
-            <label htmlFor="sidebar-telefone">Telefone</label>
-            <input
-              type="tel"
-              id="sidebar-telefone"
-              name="telefone"
-              value={formData.telefone}
-              onChange={handleChange}
-              required
-            />
-          </div>
-
-          <button type="submit" className="btn btn-primary">
-            Enviar
+      <section className="sidebar-section portal">
+        <header>
+          <h2>
+            <span>👤</span> Portal do Aluno
+          </h2>
+        </header>
+        <form className="login-form" onSubmit={handleSubmit}>
+          <input
+            type="email"
+            placeholder="E-mail institucional"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          />
+          <button type="submit" className="btn-portal">
+            Acessar Portal
           </button>
         </form>
-      </div>
-
-      <div className="sidebar-card">
-        <h3>Informações Úteis</h3>
-        <ul className="info-list">
-          <li>📞 (11) 1234-5678</li>
-          <li>📧 contato@institutowm.edu.br</li>
-          <li>📍 São Paulo - SP</li>
-          <li>🕐 Seg-Sex: 8h às 18h</li>
-        </ul>
-      </div>
+      </section>
     </aside>
   )
 }
-
-// Mantendo default export para compatibilidade
-export default Sidebar

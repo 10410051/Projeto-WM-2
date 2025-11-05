@@ -1,59 +1,70 @@
-import HeroSection from "@/components/hero-section"
-import ProgramCard from "@/components/program-card"
+"use client"
 
-export default function Home() {
+import { HeroSection } from "@/components/hero-section"
+import { ProgramCard } from "@/components/program-card"
+import { Sidebar } from "@/components/sidebar"
+
+export default function HomePage() {
   const programs = [
     {
       id: "engenharia",
       title: "Engenharia",
-      description: "Cursos de Engenharia Civil, Mecânica, Elétrica e mais.",
-      image: "/imagens/image.png",
+      icon: "⚙️",
+      color: "blue",
+      features: [
+        "Projetos de engenharia e pós-graduação",
+        "Laboratórios de última geração",
+        "Parcerias com a indústria",
+      ],
       link: "/cursos/engenharia",
     },
     {
       id: "medicina",
       title: "Medicina",
-      description: "Formação médica de excelência com infraestrutura completa.",
-      image: "/imagens/image-1.png",
+      icon: "⚕️",
+      color: "red",
+      features: ["Curso completo de 6 anos MEC", "Hospital universitário próprio", "Residência médica completa"],
       link: "/cursos/medicina",
     },
     {
       id: "administracao",
       title: "Administração",
-      description: "Prepare-se para liderar no mundo dos negócios.",
-      image: "/imagens/image-2.png",
+      icon: "💼",
+      color: "green",
+      features: ["MBA e especialização", "Casos reais de mercado", "Network empresarial"],
       link: "/cursos/administracao",
     },
   ]
 
   return (
-    <>
+    <div className="page-container">
       <HeroSection
-        title="Bem-vindo ao Instituto WM"
-        subtitle="Educação de qualidade para transformar o futuro"
-        description="Oferecemos cursos de graduação e pós-graduação nas áreas de Engenharia, Medicina e Administração."
-        ctaText="Conheça nossos cursos"
-        ctaLink="/cursos"
+        title="Excelência em Educação Superior"
+        subtitle="Formando líderes e inovadores para o futuro"
+        description="Programas acadêmicos de alta qualidade com metodologia inovadora"
+        actions={[
+          { label: "Conheça Nossos Cursos", icon: "🎓", href: "/cursos", primary: true },
+          { label: "Ver Resultados", icon: "📊", href: "/sobre", primary: false },
+        ]}
       />
 
-      <section className="container">
-        <h2 className="section-title">Nossos Cursos</h2>
-        <div className="programs-grid">
-          {programs.map((program) => (
-            <ProgramCard key={program.id} {...program} />
-          ))}
-        </div>
-      </section>
+      <main className="main-content">
+        <section className="programas-section">
+          <header className="section-header">
+            <h2>
+              <span className="bullet">🎯</span> Programas Acadêmicos
+            </h2>
+          </header>
 
-      <section className="cta-section">
-        <div className="container">
-          <h2>Pronto para começar sua jornada?</h2>
-          <p>Inscreva-se agora e faça parte da nossa comunidade acadêmica.</p>
-          <a href="/inscricao" className="btn btn-primary">
-            Inscrever-se
-          </a>
-        </div>
-      </section>
-    </>
+          <section className="programas-grid">
+            {programs.map((program) => (
+              <ProgramCard key={program.id} {...program} />
+            ))}
+          </section>
+        </section>
+      </main>
+
+      <Sidebar />
+    </div>
   )
 }

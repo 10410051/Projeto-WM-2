@@ -2,67 +2,63 @@
 
 import { useState, useEffect } from "react"
 import Link from "next/link"
+import { usePathname, useRouter } from "next/navigation"
 
-export default function Header() {
-  const [isScrolled, setIsScrolled] = useState(false)
+export function Header() {
+  const pathname = usePathname()
+  const router = useRouter()
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+
+  const navItems = [
+    { label: "Início", href: "/" },
+    { label: "Cursos", href: "/cursos" },
+    { label: "Sobre", href: "/sobre" },
+    { label: "Contato", href: "/contato" },
+  ]
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50)
+      const header = document.querySelector(".main-header")
+      if (header) {
+        if (window.scrollY > 50) {
+          header.classList.add("scrolled")
+        } else {
+          header.classList.remove("scrolled")
+        }
+      }
     }
 
     window.addEventListener("scroll", handleScroll)
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
 
+  const handleInscricao = () => {
+    router.push("/inscricao")
+  }
+
   return (
-    <header className={`header ${isScrolled ? "scrolled" : ""}`}>
-      <div className="container">
-        <nav className="navbar">
-          <Link href="/" className="logo">
-            Instituto WM
-          </Link>
+    <header className="main-header">
+      <nav className="top-nav">
+        <Link href="/" className="logo">
+          <span className="logo-icon">🎓</span>
+          <strong>Instituto de Excelência</strong>
+          <small>Educação Superior</small>
+        </Link>
 
-          <button
-            className="mobile-menu-toggle"
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            aria-label="Toggle menu"
-          >
-            <span></span>
-            <span></span>
-            <span></span>
-          </button>
+        <ul className="nav-menu">
+          {navItems.map((item) => (
+            <li key={item.href}>
+              <Link href={item.href} className={pathname === item.href ? "active" : ""}>
+                {item.label}
+              </Link>
+            </li>
+          ))}
+        </ul>
 
-          <ul className={`nav-menu ${isMobileMenuOpen ? "active" : ""}`}>
-            <li>
-              <Link href="/" onClick={() => setIsMobileMenuOpen(false)}>
-                Início
-              </Link>
-            </li>
-            <li>
-              <Link href="/cursos" onClick={() => setIsMobileMenuOpen(false)}>
-                Cursos
-              </Link>
-            </li>
-            <li>
-              <Link href="/sobre" onClick={() => setIsMobileMenuOpen(false)}>
-                Sobre
-              </Link>
-            </li>
-            <li>
-              <Link href="/contato" onClick={() => setIsMobileMenuOpen(false)}>
-                Contato
-              </Link>
-            </li>
-            <li>
-              <Link href="/inscricao" className="btn-nav" onClick={() => setIsMobileMenuOpen(false)}>
-                Inscreva-se
-              </Link>
-            </li>
-          </ul>
-        </nav>
-      </div>
+        <button className="btn-inscricao" onClick={handleInscricao}>
+          Inscreva-se
+        </button>
+      </nav>
     </header>
   )
 }

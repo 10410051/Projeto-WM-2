@@ -1,119 +1,97 @@
 "use client"
 
-import { useState } from "react"
+import { HeroSection } from "@/components/hero-section"
+import { Sidebar } from "@/components/sidebar"
 
-export default function Contato() {
-  const [formData, setFormData] = useState({
-    nome: "",
-    email: "",
-    telefone: "",
-    mensagem: "",
-  })
-
-  const handleChange = (e) => {
-    const { name, value } = e.target
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value,
-    }))
-  }
-
-  const handleSubmit = (e) => {
-    e.preventDefault()
-    alert("Mensagem enviada com sucesso! Entraremos em contato em breve.")
-    setFormData({
-      nome: "",
-      email: "",
-      telefone: "",
-      mensagem: "",
-    })
-  }
+export default function ContatoPage() {
+  const contactCards = [
+    {
+      id: "telefone",
+      icon: "📞",
+      color: "blue",
+      title: "Telefone",
+      info: "(11) 3456-7890",
+      detail: "Atendimento: Segunda a Sexta, 8h às 18h",
+    },
+    {
+      id: "email",
+      icon: "📧",
+      color: "green",
+      title: "E-mail",
+      info: "contato@instituto.edu.br",
+      detail: "Resposta em até 24 horas",
+    },
+    {
+      id: "whatsapp",
+      icon: "💬",
+      color: "red",
+      title: "WhatsApp",
+      info: "(11) 98888-7777",
+      detail: "Atendimento rápido e direto",
+    },
+  ]
 
   return (
-    <main>
-      <section className="hero-section">
-        <div className="hero-content">
-          <h1>Entre em Contato</h1>
-          <p>Estamos aqui para ajudar você</p>
-        </div>
-      </section>
+    <div className="page-container">
+      <HeroSection
+        title="Entre em Contato"
+        subtitle="Estamos aqui para ajudar você"
+        description="Tire suas dúvidas e conheça mais sobre nossos programas acadêmicos"
+      />
 
-      <section className="container">
-        <div className="contact-grid">
-          <div className="contact-info">
-            <h2>Informações de Contato</h2>
-            <div className="info-item">
-              <h3>Endereço</h3>
-              <p>
-                Rua Exemplo, 123 - Centro
-                <br />
-                São Paulo - SP
-                <br />
-                CEP: 01234-567
-              </p>
-            </div>
-            <div className="info-item">
-              <h3>Telefone</h3>
-              <p>(11) 1234-5678</p>
-            </div>
-            <div className="info-item">
-              <h3>Email</h3>
-              <p>contato@institutowm.edu.br</p>
-            </div>
-            <div className="info-item">
-              <h3>Horário de Atendimento</h3>
-              <p>
-                Segunda a Sexta: 8h às 18h
-                <br />
-                Sábado: 8h às 12h
-              </p>
-            </div>
-          </div>
+      <main className="main-content">
+        <section className="contact-section">
+          <header className="section-header">
+            <h2>
+              <span className="bullet">📞</span> Informações de Contato
+            </h2>
+          </header>
 
-          <div className="contact-form-container">
-            <h2>Envie sua Mensagem</h2>
-            <form onSubmit={handleSubmit} className="contact-form">
-              <div className="form-group">
-                <label htmlFor="nome">Nome Completo</label>
-                <input type="text" id="nome" name="nome" value={formData.nome} onChange={handleChange} required />
-              </div>
+          <section className="contact-grid">
+            {contactCards.map((card) => (
+              <article key={card.id} className="contact-card fade-in-up">
+                <header className="card-header">
+                  <figure className={`card-icon ${card.color}`}>
+                    <span>{card.icon}</span>
+                  </figure>
+                  <h3>{card.title}</h3>
+                </header>
+                <p>{card.info}</p>
+                <p>{card.detail}</p>
+              </article>
+            ))}
+          </section>
 
-              <div className="form-group">
-                <label htmlFor="email">Email</label>
-                <input type="email" id="email" name="email" value={formData.email} onChange={handleChange} required />
-              </div>
+          <section className="location-section">
+            <header className="section-header">
+              <h2>
+                <span className="bullet">📍</span> Localização
+              </h2>
+            </header>
+            <article className="location-card fade-in-up">
+              <header className="card-header">
+                <figure className="card-icon blue">
+                  <span>🏢</span>
+                </figure>
+                <h3>Campus Principal</h3>
+              </header>
+              <address>
+                <p>
+                  <strong>Endereço:</strong> Av. Paulista, 1234 - São Paulo - SP
+                </p>
+                <p>
+                  <strong>CEP:</strong> 01310-100
+                </p>
+                <p>
+                  <strong>Referência:</strong> Próximo ao metrô Trianon-MASP
+                </p>
+              </address>
+            </article>
+          </section>
+        </section>
+      </main>
 
-              <div className="form-group">
-                <label htmlFor="telefone">Telefone</label>
-                <input
-                  type="tel"
-                  id="telefone"
-                  name="telefone"
-                  value={formData.telefone}
-                  onChange={handleChange}
-                  required
-                />
-              </div>
-
-              <div className="form-group">
-                <label htmlFor="mensagem">Mensagem</label>
-                <textarea
-                  id="mensagem"
-                  name="mensagem"
-                  rows="5"
-                  value={formData.mensagem}
-                  onChange={handleChange}
-                  required
-                ></textarea>
-              </div>
-
-              <button type="submit" className="btn btn-primary">
-                Enviar Mensagem
-              </button>
-            </form>
-          </div>
-        </div>
-      </section>
-    </main>
+      <Sidebar />
+    </div>
   )
 }

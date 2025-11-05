@@ -1,12 +1,12 @@
 import { Geist } from "next/font/google"
 import "./globals.css"
-import Header from "@/components/header"
+import { Header } from "@/components/header"
 
 const geist = Geist({ subsets: ["latin"] })
 
 export const metadata = {
-  title: "Instituto WM - Educação de Excelência",
-  description: "Educação de qualidade para transformar o futuro. Cursos de Engenharia, Medicina e Administração.",
+  title: "Instituto de Excelência - Educação Superior",
+  description: "Formando líderes e inovadores para o futuro",
 }
 
 export default function RootLayout({ children }) {
@@ -15,11 +15,6 @@ export default function RootLayout({ children }) {
       <body className={geist.className}>
         <Header />
         {children}
-        <footer className="footer">
-          <div className="container">
-            <p>&copy; 2025 Instituto WM. Todos os direitos reservados.</p>
-          </div>
-        </footer>
       </body>
     </html>
   )

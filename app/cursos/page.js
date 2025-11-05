@@ -1,46 +1,120 @@
-import ProgramCard from "@/components/program-card"
+"use client"
 
-export default function Cursos() {
-  const programs = [
+import { HeroSection } from "@/components/hero-section"
+import { ProgramCard } from "@/components/program-card"
+import { Sidebar } from "@/components/sidebar"
+
+export default function CursosPage() {
+  const graduacao = [
     {
       id: "engenharia",
       title: "Engenharia",
-      description: "Cursos de Engenharia Civil, Mecânica, Elétrica e mais.",
-      image: "/imagens/image.png",
+      icon: "⚙️",
+      color: "blue",
+      features: [
+        "Bacharelado • 5 anos",
+        "Projetos reais e laboratórios modernos",
+        "Trilhas Civil, Computação e Elétrica",
+        "Parcerias com a indústria",
+      ],
       link: "/cursos/engenharia",
     },
     {
       id: "medicina",
       title: "Medicina",
-      description: "Formação médica de excelência com infraestrutura completa.",
-      image: "/imagens/image-1.png",
+      icon: "⚕️",
+      color: "red",
+      features: ["Bacharelado • 6 anos", "Hospital-escola próprio", "Simulação realística", "Residência completa"],
       link: "/cursos/medicina",
     },
     {
       id: "administracao",
       title: "Administração",
-      description: "Prepare-se para liderar no mundo dos negócios.",
-      image: "/imagens/image-2.png",
+      icon: "💼",
+      color: "green",
+      features: [
+        "Bacharelado • 4 anos",
+        "Gestão, dados e empreendedorismo",
+        "Networking empresarial",
+        "Projetos com empresas",
+      ],
       link: "/cursos/administracao",
     },
   ]
 
-  return (
-    <main>
-      <section className="hero-section">
-        <div className="hero-content">
-          <h1>Nossos Cursos</h1>
-          <p>Explore nossas opções de graduação e pós-graduação</p>
-        </div>
-      </section>
+  const tecnico = [
+    {
+      id: "enfermagem",
+      title: "Técnico em Enfermagem",
+      icon: "🏥",
+      color: "red",
+      features: [
+        "Duração: 24 meses",
+        "Práticas em laboratório",
+        "Unidades de saúde conveniadas",
+        "Estágio supervisionado",
+      ],
+      link: "#",
+    },
+    {
+      id: "informatica",
+      title: "Técnico em Informática",
+      icon: "💻",
+      color: "blue",
+      features: ["Duração: 18 meses", "Web, redes e suporte", "Projetos para portfólio", "Certificações preparatórias"],
+      link: "#",
+    },
+    {
+      id: "adm-tecnico",
+      title: "Técnico em Administração",
+      icon: "📊",
+      color: "green",
+      features: ["Duração: 12 meses", "Rotinas administrativas", "Finanças e logística", "Projeto integrador"],
+      link: "#",
+    },
+  ]
 
-      <section className="container">
-        <div className="programs-grid">
-          {programs.map((program) => (
-            <ProgramCard key={program.id} {...program} />
-          ))}
-        </div>
-      </section>
-    </main>
+  return (
+    <div className="page-container">
+      <HeroSection
+        title="Nossos Cursos"
+        subtitle="Ofertas de Ensino Superior e Técnico"
+        description="Metodologia prática e infraestrutura moderna para sua formação"
+        actions={[
+          { label: "Graduação", icon: "🎓", href: "#graduacao", primary: true },
+          { label: "Técnico", icon: "🛠️", href: "#tecnico", primary: false },
+        ]}
+      />
+
+      <main className="main-content">
+        <section className="programas-section" id="graduacao">
+          <header className="section-header">
+            <h2>
+              <span className="bullet">🎯</span> Ensino Superior - Graduação
+            </h2>
+          </header>
+          <section className="programas-grid">
+            {graduacao.map((program) => (
+              <ProgramCard key={program.id} {...program} />
+            ))}
+          </section>
+        </section>
+
+        <section className="programas-section" id="tecnico">
+          <header className="section-header">
+            <h2>
+              <span className="bullet">🛠️</span> Ensino Técnico
+            </h2>
+          </header>
+          <section className="programas-grid">
+            {tecnico.map((program) => (
+              <ProgramCard key={program.id} {...program} />
+            ))}
+          </section>
+        </section>
+      </main>
+
+      <Sidebar />
+    </div>
   )
 }
