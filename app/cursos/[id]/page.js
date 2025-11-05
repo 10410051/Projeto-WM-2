@@ -2,7 +2,7 @@
 
 import { useParams } from "next/navigation"
 import { HeroSection } from "@/components/hero-section"
-import { ProgramCard } from "@/components/program-card"
+import { ProgramCard } from "@/components/program-cards"
 import { useEffect, useState } from "react"
 
 const cursosData = {
