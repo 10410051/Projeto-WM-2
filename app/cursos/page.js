@@ -76,17 +76,17 @@ export default function CursosPage() {
 
   return (
     <div className="page-container">
-      <HeroSection
-        title="Nossos Cursos"
-        subtitle="Ofertas de Ensino Superior e Técnico"
-        description="Metodologia prática e infraestrutura moderna para sua formação"
-        actions={[
-          { label: "Graduação", icon: "🎓", href: "#graduacao", primary: true },
-          { label: "Técnico", icon: "🛠️", href: "#tecnico", primary: false },
-        ]}
-      />
-
       <main className="main-content">
+        <HeroSection
+          title="Nossos Cursos"
+          subtitle="Ofertas de Ensino Superior e Técnico"
+          description="Metodologia prática e infraestrutura moderna para sua formação"
+          actions={[
+            { label: "Graduação", icon: "🎓", href: "#graduacao", primary: true },
+            { label: "Técnico", icon: "🛠️", href: "#tecnico", primary: false },
+          ]}
+        />
+
         <section className="programas-section" id="graduacao">
           <header className="section-header">
             <h2>

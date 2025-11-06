@@ -35,20 +35,20 @@ export default function HomePage() {
       link: "/cursos/administracao",
     },
   ]
-
   return (
-    <div className="page-container">
-      <HeroSection
-        title="Excelência em Educação Superior"
-        subtitle="Formando líderes e inovadores para o futuro"
-        description="Programas acadêmicos de alta qualidade com metodologia inovadora"
-        actions={[
-          { label: "Conheça Nossos Cursos", icon: "🎓", href: "/cursos", primary: true },
-          { label: "Ver Resultados", icon: "📊", href: "/sobre", primary: false },
-        ]}
-      />
 
+    <div className="page-container">
       <main className="main-content">
+        <HeroSection
+          title="Excelência em Educação Superior"
+          subtitle="Formando líderes e inovadores para o futuro"
+          description="Programas acadêmicos de alta qualidade com metodologia inovadora"
+          actions={[
+            { label: "Conheça Nossos Cursos", icon: "🎓", href: "/cursos", primary: true },
+            { label: "Ver Resultados", icon: "📊", href: "/sobre", primary: false },
+          ]}
+        />
+
         <section className="programas-section">
           <header className="section-header">
             <h2>

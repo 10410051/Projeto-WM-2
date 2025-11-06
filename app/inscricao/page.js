@@ -63,13 +63,13 @@ export default function InscricaoPage() {
 
   return (
     <div className="page-container">
-      <HeroSection
-        title="Formulário de Inscrição"
-        subtitle="Dê o primeiro passo para seu futuro"
-        description="Preencha o formulário abaixo e nossa equipe entrará em contato"
-      />
-
       <main className="main-content">
+        <HeroSection
+          title="Formulário de Inscrição"
+          subtitle="Dê o primeiro passo para seu futuro"
+          description="Preencha o formulário abaixo e nossa equipe entrará em contato"
+        />
+
         <section className="form-section">
           <header className="section-header">
             <h2>

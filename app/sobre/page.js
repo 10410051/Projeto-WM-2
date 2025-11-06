@@ -6,17 +6,17 @@ import { Sidebar } from "@/components/sidebar"
 export default function SobrePage() {
   return (
     <div className="page-container">
-      <HeroSection
-        title="Sobre o Instituto"
-        subtitle="Mais de 30 anos de excelência em educação"
-        description="Conheça nossa história, missão e valores"
-        actions={[
-          { label: "Conheça Nossos Cursos", icon: "🎓", href: "/cursos", primary: true },
-          { label: "Entre em Contato", icon: "📞", href: "/contato", primary: false },
-        ]}
-      />
-
       <main className="main-content">
+        <HeroSection
+          title="Sobre o Instituto"
+          subtitle="Mais de 30 anos de excelência em educação"
+          description="Conheça nossa história, missão e valores"
+          actions={[
+            { label: "Conheça Nossos Cursos", icon: "🎓", href: "/cursos", primary: true },
+            { label: "Entre em Contato", icon: "📞", href: "/contato", primary: false },
+          ]}
+        />
+
         <section className="programas-section">
           <header className="section-header">
             <h2>

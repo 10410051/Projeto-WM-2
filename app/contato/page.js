@@ -30,16 +30,15 @@ export default function ContatoPage() {
       detail: "Atendimento rápido e direto",
     },
   ]
-
   return (
     <div className="page-container">
-      <HeroSection
-        title="Entre em Contato"
-        subtitle="Estamos aqui para ajudar você"
-        description="Tire suas dúvidas e conheça mais sobre nossos programas acadêmicos"
-      />
-
       <main className="main-content">
+        <HeroSection
+          title="Entre em Contato"
+          subtitle="Estamos aqui para ajudar você"
+          description="Tire suas dúvidas e conheça mais sobre nossos programas acadêmicos"
+        />
+
         <section className="contact-section">
           <header className="section-header">
             <h2>

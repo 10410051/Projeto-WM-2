@@ -262,17 +262,17 @@ export default function CursoDetailPage() {
 
   return (
     <div className="page-container">
-      <HeroSection
-        title={curso.title}
-        subtitle={curso.subtitle}
-        description={curso.description}
-        actions={[
-          { label: "Ver Áreas", icon: curso.icon, href: "#areas", primary: true },
-          { label: "Fale Conosco", icon: "📞", href: "/contato", primary: false },
-        ]}
-      />
-
       <main className="main-content">
+        <HeroSection
+          title={curso.title}
+          subtitle={curso.subtitle}
+          description={curso.description}
+          actions={[
+            { label: "Ver Áreas", icon: curso.icon, href: "#areas", primary: true },
+            { label: "Fale Conosco", icon: "📞", href: "/contato", primary: false },
+          ]}
+        />
+
         <section className="programas-section" id="areas">
           <header className="section-header">
             <h2>
