@@ -1,8 +1,12 @@
-Lucas Assis - 10735712
-Daniel Zacharias Bittar Atui - 10410051
-Gabriel Athia - 10264752
 
 # Projeto-WM-2
+
+Lucas Assis - 10735712
+
+Daniel Zacharias Bittar Atui - 10410051
+
+Gabriel Athia - 10264752
+
 
 ## Projeto Next.js — Parte 1 (Estrutura Base)
 
