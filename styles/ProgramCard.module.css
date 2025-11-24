@@ -1,0 +1,135 @@
+.programaCard {
+  background-color: #ffffff;
+  border-radius: 16px;
+  padding: 2rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+.programaCard.fadeInUp {
+  opacity: 1;
+  transform: translateY(0);
+  animation: fadeInUp 0.6s ease-out forwards;
+}
+
+.programaCard:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+.cardHeader {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 1rem;
+}
+
+.cardIcon {
+  width: 60px;
+  height: 60px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  transition: transform 0.3s ease;
+}
+
+.programaCard:hover .cardIcon {
+  transform: rotate(5deg) scale(1.1);
+}
+
+.cardIcon.blue {
+  background-color: #2563eb;
+  color: #ffffff;
+}
+
+.cardIcon.red {
+  background-color: #dc2626;
+  color: #ffffff;
+}
+
+.cardIcon.green {
+  background-color: #16a34a;
+  color: #ffffff;
+}
+
+.cardHeader h3 {
+  font-size: 1.25rem;
+  color: #1f2937;
+}
+
+.cardFeatures {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  flex-grow: 1;
+}
+
+.cardFeatures li {
+  color: #4b5563;
+  font-size: 0.9rem;
+  padding-left: 1rem;
+  position: relative;
+  transition: transform 0.2s ease;
+}
+
+.programaCard:hover .cardFeatures li {
+  transform: translateX(5px);
+}
+
+.cardFooter {
+  margin-top: auto;
+}
+
+.btnSaibaMais {
+  display: block;
+  text-align: center;
+  padding: 0.75rem;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.btnSaibaMais.blue {
+  background-color: #dbeafe;
+  color: #2563eb;
+}
+
+.btnSaibaMais.red {
+  background-color: #fecaca;
+  color: #dc2626;
+}
+
+.btnSaibaMais.green {
+  background-color: #bbf7d0;
+  color: #16a34a;
+}
+
+.btnSaibaMais:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.btnSaibaMais:active {
+  transform: translateY(0);
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

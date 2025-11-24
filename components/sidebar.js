@@ -1,6 +1,7 @@
 "use client"
 
 import { useState } from "react"
+import styles from "@/styles/Sidebar.module.css"
 
 export function Sidebar() {
   const [email, setEmail] = useState("")
@@ -17,15 +18,15 @@ export function Sidebar() {
   }
 
   return (
-    <aside className="sidebar">
-      <section className="sidebar-section">
+    <aside className={styles.sidebar}>
+      <section className={styles.sidebarSection}>
         <header>
           <h2>
             <span>🏢</span> Nossa Instituição
           </h2>
         </header>
-        <ul className="info-list">
-          <li className="highlight">📍 CAMPUS PRINCIPAL</li>
+        <ul className={styles.infoList}>
+          <li className={styles.highlight}>📍 CAMPUS PRINCIPAL</li>
           <li>Mais de 30 anos no mercado</li>
           <li>Mais de 5000 alunos formados</li>
           <li>Nota máxima no MEC</li>
@@ -33,13 +34,13 @@ export function Sidebar() {
         </ul>
       </section>
 
-      <section className="sidebar-section">
+      <section className={styles.sidebarSection}>
         <header>
           <h2>
             <span>📞</span> Contato Rápido
           </h2>
         </header>
-        <ul className="contact-list">
+        <ul className={styles.contactList}>
           <li>
             <span>📞</span> (11) 3456-7890
           </li>
@@ -52,13 +53,13 @@ export function Sidebar() {
         </ul>
       </section>
 
-      <section className="sidebar-section portal">
+      <section className={styles.sidebarSection}>
         <header>
           <h2>
             <span>👤</span> Portal do Aluno
           </h2>
         </header>
-        <form className="login-form" onSubmit={handleSubmit}>
+        <form className={styles.loginForm} onSubmit={handleSubmit}>
           <input
             type="email"
             placeholder="E-mail institucional"
@@ -66,7 +67,7 @@ export function Sidebar() {
             onChange={(e) => setEmail(e.target.value)}
             required
           />
-          <button type="submit" className="btn-portal">
+          <button type="submit" className={styles.btnPortal}>
             Acessar Portal
           </button>
         </form>
