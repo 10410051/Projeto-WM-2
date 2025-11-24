@@ -18,9 +18,9 @@ npm install
 npm run dev# ou
 yarn
 yarn dev
-```
+````
 
-Abra <http://localhost:3000> no navegador.
+Abra [http://localhost:3000](https://www.google.com/search?q=http://localhost:3000) no navegador.
 Rotas inclusas (exemplos)
 
 / (Home) — usa CSS Module
@@ -38,7 +38,7 @@ Nesta etapa, pegamos o nosso projeto HTML/CSS/JS estático e o transformamos em 
 
 Vamos entender o que foi feito?
 
-1. O CSS Global (O "Cérebro" do Estilo)
+1.  O CSS Global (O "Cérebro" do Estilo)
 
 O que fizemos: Todo o conteúdo do nosso style.css original foi copiado para dentro de styles/globals.css.
 
@@ -46,7 +46,7 @@ Por quê: No Next.js, este é o único lugar onde podemos colocar estilos que af
 
 Como funciona: Este arquivo só é carregado uma vez, no arquivo principal pages/\_app.js.
 
-2. O Template Principal (Layout.js)
+2.  O Template Principal (Layout.js)
 
 O maior benefício do React é criar componentes. Em vez de ter o \<header\> e a \<aside\> em todos os arquivos HTML, nós os isolamos.
 
@@ -84,7 +84,7 @@ export default function Layout({ children }) {
 }
 ```
 
-3. O "Coração" da Aplicação (\_app.js)
+3.  O "Coração" da Aplicação (\_app.js)
 
 Este é o arquivo mais importante do Next.js. Ele é o "molde" que envolve todas as páginas do site.
 
@@ -108,7 +108,7 @@ export default function MyApp({ Component, pageProps }) {
 }
 ```
 
-4. As Páginas (De .html para .js)
+4.  As Páginas (De .html para .js)
 
 Agora que temos o template, só precisamos criar o conteúdo de cada página.
 
@@ -122,7 +122,7 @@ pages/index.js (a rota /) recebe o conteúdo que estava dentro da \<main\> do in
 
 pages/cursos.js (a rota /cursos) recebe o conteúdo que estava dentro da \<main\> do cursos.html.
 
-5. O JavaScript Interativo (ClientScripts.js)
+5.  O JavaScript Interativo (ClientScripts.js)
 
 Não podemos simplesmente jogar um arquivo .js no Next.js. Precisamos "traduzi-lo" para o React.
 
@@ -148,22 +148,22 @@ Vamos analisar as principais implementações:
 
 Com o App Router, a forma como as rotas são criadas mudou:
 
-* **`app/layout.js` (O "Molde" Global):**
+  * **`app/layout.js` (O "Molde" Global):**
     Este arquivo substitui o antigo `pages/_app.js`. Ele é o "layout raiz" (Root Layout) e é responsável por definir a estrutura `<html>` e `<body>` da aplicação. É aqui que importamos o `globals.css` e inserimos componentes globais, como o nosso `<Header />`, garantindo que ele apareça em todas as páginas.
 
-* **Páginas são `page.js`:**
+  * **Páginas são `page.js`:**
     Em vez de `pages/cursos.js`, agora temos `app/cursos/page.js`. Qualquer arquivo chamado `page.js` dentro de uma pasta na `app/` se torna uma rota pública.
 
-  * `app/page.js` → Rota `/`
-  * `app/cursos/page.js` → Rota `/cursos`
-  * `app/sobre/page.js` → Rota `/sobre`
-  * `app/contato/page.js` → Rota `/contato`
+      * `app/page.js` → Rota `/`
+      * `app/cursos/page.js` → Rota `/cursos`
+      * `app/sobre/page.js` → Rota `/sobre`
+      * `app/contato/page.js` → Rota `/contato`
 
-* **Rotas Dinâmicas `[pasta]`:**
+  * **Rotas Dinâmicas `[pasta]`:**
     Uma das implementações mais importantes é a página de detalhe do curso, `app/cursos/[id]/page.js`.
 
-  * A pasta `[id]` define um parâmetro de rota dinâmico.
-  * Isso permite que rotas como `/cursos/engenharia`, `/cursos/medicina` e `/cursos/administracao` sejam todas renderizadas pelo *mesmo* arquivo de componente.
+      * A pasta `[id]` define um parâmetro de rota dinâmico.
+      * Isso permite que rotas como `/cursos/engenharia`, `/cursos/medicina` e `/cursos/administracao` sejam todas renderizadas pelo *mesmo* arquivo de componente.
 
 ### 2\. Client Components: `"use client"`
 
@@ -171,25 +171,25 @@ A maior mudança no App Router é a introdução dos **Client Components**. Por 
 
 Para adicionar interatividade (como cliques, formulários, ou qualquer *hook* do React), precisamos "marcar" o arquivo com a diretiva `"use client"` no topo.
 
-* **Por que usamos?** Usamos `"use client"` em qualquer componente que precise de:
+  * **Por que usamos?** Usamos `"use client"` em qualquer componente que precise de:
 
-  * `useState` (para gerenciar estado)
-  * `useEffect` (para efeitos colaterais, como API calls ou manipulação do DOM)
-  * `useRouter`, `usePathname`, `useParams` (hooks de navegação)
-  * Manipuladores de eventos (como `onClick`, `onChange`, `onSubmit`)
+      * `useState` (para gerenciar estado)
+      * `useEffect` (para efeitos colaterais, como API calls ou manipulação do DOM)
+      * `useRouter`, `usePathname`, `useParams` (hooks de navegação)
+      * Manipuladores de eventos (como `onClick`, `onChange`, `onSubmit`)
 
-* **Exemplos no Projeto:**
+  * **Exemplos no Projeto:**
 
-  * `app/inscricao/page.js`: Usa `useState` para controlar os dados do formulário (`formData`).
-  * `components/header.js`: Usa `useEffect` para criar um efeito de "scroll" (adicionando a classe `.scrolled` ao `window.scrollY > 50`), `usePathname` para destacar o link ativo, e `useRouter` para o botão "Inscreva-se".
-  * `components/sidebar.js`: Usa `useState` para gerenciar o formulário de "Portal do Aluno".
-  * `components/program-cards.js`: Usa `useState`, `useEffect` e `useRef` para implementar uma animação de *fade-in* com `IntersectionObserver` quando o card entra na tela.
+      * `app/inscricao/page.js`: Usa `useState` para controlar os dados do formulário (`formData`).
+      * `components/header.js`: Usa `useEffect` para criar um efeito de "scroll" (adicionando a classe `.scrolled` ao `window.scrollY > 50`), `usePathname` para destacar o link ativo, e `useRouter` para o botão "Inscreva-se".
+      * `components/sidebar.js`: Usa `useState` para gerenciar o formulário de "Portal do Aluno".
+      * `components/program-cards.js`: Usa `useState`, `useEffect` e `useRef` para implementar uma animação de *fade-in* com `IntersectionObserver` quando o card entra na tela.
 
 ### 3\. Principais Hooks do Next.js em Ação
 
 Estamos usando os hooks modernos do App Router para navegação e leitura de dados da rota:
 
-* **`useRouter()` (em `app/inscricao/page.js`)**
+  * **`useRouter()` (em `app/inscricao/page.js`)**
     Usado para navegação programática. Após o usuário enviar o formulário de inscrição, usamos `router.push("/")` para redirecioná-lo de volta à página inicial.
 
     ```javascript
@@ -204,7 +204,7 @@ Estamos usando os hooks modernos do App Router para navegação e leitura de dad
     }
     ```
 
-* **`usePathname()` (em `components/header.js`)**
+  * **`usePathname()` (em `components/header.js`)**
     Usado para ler a URL atual. Isso nos permite comparar a URL com os links de navegação e aplicar uma classe `.active` ao link correspondente à página que o usuário está visitando.
 
     ```javascript
@@ -216,7 +216,7 @@ Estamos usando os hooks modernos do App Router para navegação e leitura de dad
     </Link>
     ```
 
-* **`useParams()` (em `app/cursos/[id]/page.js`)**
+  * **`useParams()` (em `app/cursos/[id]/page.js`)**
     Este hook é essencial para rotas dinâmicas. Ele lê os parâmetros da URL. Na página `[id]`, ele nos dá o valor de `id` (ex: "engenharia"), permitindo que o componente exiba os dados corretos do curso.
 
     ```javascript
@@ -234,10 +234,10 @@ Estamos usando os hooks modernos do App Router para navegação e leitura de dad
 
 O projeto está totalmente componentizado para maximizar a reutilização de código:
 
-* **`components/header.js`:** Componente de cabeçalho global, agora inserido diretamente no `app/layout.js`.
-* **`components/sidebar.js`:** A barra lateral é um componente separado, importado e utilizado em todas as páginas (como `app/page.js`, `app/cursos/page.js`, etc.) para manter o layout consistente.
-* **`components/hero-section.js`:** Um componente "burro" (dumb component) perfeito. Ele não tem lógica própria, apenas recebe `props` (`title`, `subtitle`, `description`, `actions`) e renderiza a seção de destaque. É usado em todas as páginas, cada uma com seu próprio conteúdo.
-* **`components/program-cards.js`:** Componente de card reutilizável que é usado nas páginas "Home" e "Cursos" para exibir os diferentes programas. Ele também contém sua própria lógica de animação (`IntersectionObserver`), tornando-o um componente inteligente e autônomo.
+  * **`components/header.js`:** Componente de cabeçalho global, agora inserido diretamente no `app/layout.js`.
+  * **`components/sidebar.js`:** A barra lateral é um componente separado, importado e utilizado em todas as páginas (como `app/page.js`, `app/cursos/page.js`, etc.) para manter o layout consistente.
+  * **`components/hero-section.js`:** Um componente "burro" (dumb component) perfeito. Ele não tem lógica própria, apenas recebe `props` (`title`, `subtitle`, `description`, `actions`) e renderiza a seção de destaque. É usado em todas as páginas, cada uma com seu próprio conteúdo.
+  * **`components/program-cards.js`:** Componente de card reutilizável que é usado nas páginas "Home" e "Cursos" para exibir os diferentes programas. Ele também contém sua própria lógica de animação (`IntersectionObserver`), tornando-o um componente inteligente e autônomo.
 
 ### 5\. Criação de API Própria (Route Handlers)
 
@@ -373,5 +373,42 @@ useEffect(() => {
 }, [])
 ```
 
-Essa estrutura torna o site não apenas funcional, mas visualmente agradável e moderno, utilizando os recursos nativos do React dentro do ecossistema Next.js.
+-----
 
+## Parte 4: Por que este é um Projeto Extensionista?
+
+A extensão universitária visa articular o ensino e a pesquisa com as demandas da sociedade, promovendo uma troca de saberes. Este projeto de "Instituto de Excelência" não é apenas um exercício de codificação, mas uma **ferramenta de impacto social e educacional**.
+
+Abaixo, detalhamos como o código desenvolvido reflete os princípios extensionistas:
+
+### 1\. Democratização do Acesso à Informação e Educação
+
+A estrutura do projeto foi pensada para facilitar o acesso da comunidade a oportunidades de ensino técnico e superior.
+
+  * **Implementação:** No arquivo `app/cursos/page.js` e na API `app/api/programas/route.js`, organizamos a informação de forma clara entre "Graduação" e "Técnico".
+  * **Impacto:** Ao estruturar os dados em um arquivo JSON (`data/cursos.json`) que alimenta a interface, permitimos que informações sobre qualificação profissional (engenharia, medicina, cursos técnicos) cheguem de forma organizada ao usuário, combatendo a desinformação e incentivando a formação profissional.
+
+### 2\. Acessibilidade e Experiência do Usuário (UX)
+
+Um projeto extensionista deve ser inclusivo. A tecnologia escolhida (Next.js) e as técnicas de CSS aplicadas garantem que o site seja acessível a um público amplo, independentemente do dispositivo utilizado.
+
+  * **Responsividade:** O uso de `media queries` nos arquivos CSS Modules (ex: `styles/Layout.module.css`) adapta o conteúdo para celulares e tablets. Isso é crucial para atingir populações que acessam a internet majoritariamente via mobile.
+  * **Performance:** A renderização otimizada do Next.js (Server Components em `layout.js` e Client Components onde necessário) garante que o site carregue rápido, respeitando conexões de dados limitadas.
+
+### 3\. Interatividade como Ponte Social
+
+O código não é estático; ele convida a comunidade a interagir com a instituição.
+
+  * **Formulário de Inscrição (`app/inscricao/page.js`):** A implementação de validações e máscaras (CPF, Telefone) reduz barreiras burocráticas, facilitando a entrada de novos alunos.
+  * **Canais de Comunicação (`app/contato/page.js`):** A disponibilização clara de WhatsApp, telefone e e-mail cria canais diretos de diálogo com a sociedade.
+
+### 4\. Transparência Institucional
+
+A página `app/sobre/page.js` cumpre o papel de prestar contas à sociedade, apresentando a missão ("Transformar vidas"), a visão e os valores éticos da instituição. Isso reforça o compromisso da organização simulada com o desenvolvimento regional.
+
+### 5\. Difusão de Conhecimento Tecnológico (Open Source)
+
+Por fim, a própria natureza deste repositório (código aberto com documentação detalhada nas Partes 1, 2 e 3) atua como uma extensão educacional para outros estudantes de tecnologia. Ao detalhar o processo de migração e a lógica dos hooks (`useEffect`, `useState`), estamos devolvendo à comunidade técnica o conhecimento adquirido na universidade.
+
+```
+```
