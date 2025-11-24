@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react"
 import Link from "next/link"
+import styles from "@/styles/ProgramCard.module.css"
 
 export function ProgramCard({ title, icon, color, features, link }) {
   const cardRef = useRef(null)
@@ -35,21 +36,21 @@ export function ProgramCard({ title, icon, color, features, link }) {
   }, [])
 
   return (
-    <article ref={cardRef} className={`programa-card ${isVisible ? "fade-in-up" : ""}`}>
-      <header className="card-header">
-        <figure className={`card-icon ${color}`}>
+    <article ref={cardRef} className={`${styles.programaCard} ${isVisible ? styles.fadeInUp : ""}`}>
+      <header className={styles.cardHeader}>
+        <figure className={`${styles.cardIcon} ${styles[color]}`}>
           <span>{icon}</span>
         </figure>
         <h3>{title}</h3>
       </header>
-      <ul className="card-features">
+      <ul className={styles.cardFeatures}>
         {features.map((feature, index) => (
           <li key={index}>{feature}</li>
         ))}
       </ul>
       {link && (
-        <footer className="card-footer">
-          <Link href={link} className={`btn-saiba-mais ${color}`}>
+        <footer className={styles.cardFooter}>
+          <Link href={link} className={`${styles.btnSaibaMais} ${styles[color]}`}>
             Saiba Mais
           </Link>
         </footer>

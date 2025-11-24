@@ -1,0 +1,122 @@
+.sidebar {
+  background-color: #ffffff;
+  padding: 2rem 1.5rem;
+  box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
+  height: fit-content;
+  position: sticky;
+  top: 0;
+  animation: slideInLeft 0.8s ease-out 0.5s backwards;
+}
+
+.sidebarSection {
+  margin-bottom: 2rem;
+}
+
+.sidebarSection header h2 {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1rem;
+  color: #1f2937;
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid #e5e7eb;
+}
+
+.infoList,
+.contactList {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.infoList li,
+.contactList li {
+  font-size: 0.9rem;
+  color: #4b5563;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: transform 0.2s ease;
+}
+
+.infoList li:hover,
+.contactList li:hover {
+  transform: translateX(5px);
+}
+
+.infoList .highlight {
+  font-weight: 600;
+  color: #2563eb;
+}
+
+.loginForm {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.loginForm input {
+  padding: 0.75rem;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+}
+
+.loginForm input:focus {
+  outline: none;
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+  transform: scale(1.02);
+}
+
+.btnPortal {
+  background-color: #2563eb;
+  color: #ffffff;
+  border: none;
+  padding: 0.75rem;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btnPortal:hover {
+  background-color: #1e3a8a;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.btnPortal:active {
+  transform: translateY(0);
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@media (max-width: 1024px) {
+  .sidebar {
+    position: static;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+  }
+}
+
+@media (max-width: 480px) {
+  .sidebar {
+    padding: 1rem;
+  }
+
+  .sidebarSection {
+    margin-bottom: 1.5rem;
+  }
+}
