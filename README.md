@@ -230,3 +230,140 @@ O projeto está totalmente componentizado para maximizar a reutilização de có
 * **`components/sidebar.js`:** A barra lateral é um componente separado, importado e utilizado em todas as páginas (como `app/page.js`, `app/cursos/page.js`, etc.) para manter o layout consistente.
 * **`components/hero-section.js`:** Um componente "burro" (dumb component) perfeito. Ele não tem lógica própria, apenas recebe `props` (`title`, `subtitle`, `description`, `actions`) e renderiza a seção de destaque. É usado em todas as páginas, cada uma com seu próprio conteúdo.
 * **`components/program-cards.js`:** Componente de card reutilizável que é usado nas páginas "Home" e "Cursos" para exibir os diferentes programas. Ele também contém sua própria lógica de animação (`IntersectionObserver`), tornando-o um componente inteligente e autônomo.
+
+### 5\. Criação de API Própria (Route Handlers)
+
+O Next.js não serve apenas para criar páginas (frontend); ele também permite criar rotas de API (backend) dentro do mesmo projeto.
+
+**O que fizemos:** Criamos o arquivo `app/api/programas/route.js`.
+
+**Por quê:** Precisávamos de uma fonte de dados para listar nossos cursos. Em um cenário real, isso viria de um banco de dados externo, mas aqui simulamos um backend que lê de um arquivo JSON e responde às requisições do frontend.
+
+**Como funciona:**
+Utilizamos a classe `NextResponse` para retornar JSON. Também implementamos um sistema simples de filtro via *Query Params*.
+
+```javascript
+// app/api/programas/route.js
+import { NextResponse } from "next/server"
+import cursosData from "@/data/cursos.json"
+
+export async function GET(request) {
+  // Pega a URL da requisição
+  const { searchParams } = new URL(request.url)
+  // Verifica se tem algo como ?categoria=graduacao
+  const categoria = searchParams.get("categoria")
+
+  // Filtra os dados se houver categoria, ou retorna tudo
+  const filtrados = categoria
+    ? cursosData.programas.filter((p) => p.categoria === categoria)
+    : cursosData.programas
+
+  return NextResponse.json(filtrados)
+}
+```
+
+### 6\. Consumindo Dados (Fetch no Client-Side)
+
+Como optamos por usar `"use client"` nas páginas principais para gerenciar estados de carregamento (`loading`), o consumo de dados acontece no navegador.
+
+**O que fizemos:** Nas páginas `app/page.js` (Home) e `app/cursos/page.js`, utilizamos o padrão `useEffect` + `fetch`.
+
+**Como funciona:**
+
+1.  Criamos um estado para armazenar os dados (`programs`) e um para o carregamento (`loading`).
+2.  Quando o componente monta, o `fetch` chama nossa API interna.
+3.  Atualizamos o estado e o React renderiza os cards.
+
+<!-- end list -->
+
+```javascript
+// Exemplo em app/page.js
+useEffect(() => {
+  async function fetchPrograms() {
+    try {
+      // Chama a nossa API criada no passo anterior
+      const response = await fetch("/api/programas?categoria=graduacao")
+      const data = await response.json()
+      setPrograms(data.slice(0, 3)) // Pega apenas os 3 primeiros
+    } finally {
+      setLoading(false) // Desliga o "Carregando..."
+    }
+  }
+  fetchPrograms()
+}, [])
+```
+
+### 7\. Roteamento Dinâmico Avançado (`[id]`)
+
+Uma das partes mais poderosas foi a criação da página de detalhes.
+
+**O que fizemos:** O arquivo `app/cursos/[id]/page.js`.
+
+**Como funciona:**
+Quando o usuário acessa `/cursos/engenharia`, o Next.js entende que `engenharia` é o `id`.
+Utilizamos um objeto local `cursosData` (dentro do próprio arquivo, para fins didáticos) que funciona como um "banco de dados" de detalhes. O hook `useEffect` detecta quando o ID muda e carrega as informações correspondentes (abas, laboratórios, coordenação).
+
+```javascript
+// app/cursos/[id]/page.js
+const params = useParams() // Pega o parametro da URL
+const id = params.id 
+
+useEffect(() => {
+  // Busca no objeto estático as informações daquele curso
+  if (id && cursosData[id]) {
+    setCurso(cursosData[id])
+  }
+}, [id])
+```
+
+### 8\. Formulários Interativos e Máscaras
+
+Implementamos um formulário completo com validação visual e formatação de dados.
+
+**O que fizemos:** A página `app/inscricao/page.js`.
+
+**Destaques da implementação:**
+
+  * **Controlled Inputs:** O estado `formData` controla todos os campos. Cada letra digitada atualiza o estado via função `handleChange`.
+  * **Máscaras de Input:** Criamos funções auxiliares (`formatCPF`, `formatTelefone`) que aplicam a formatação (pontos e traços) em tempo real enquanto o usuário digita.
+  * **Redirecionamento:** Após o "envio" (submit), usamos o `setTimeout` para simular uma espera e o `router.push('/')` para levar o usuário de volta à home.
+
+<!-- end list -->
+
+```javascript
+// Exemplo da lógica de máscara
+const formatCPF = (value) => {
+  const numbers = value.replace(/\D/g, "") // Remove tudo que não é número
+  // Lógica de regex para adicionar pontos e traço
+  return numbers.replace(/(\d{3})(\d)/, "$1.$2")... 
+}
+```
+
+### 9\. Estilização Modular e Animações
+
+Mantivemos a organização do CSS usando **CSS Modules**, o que evita conflitos de classes entre componentes.
+
+**O que fizemos:**
+
+  * `styles/Header.module.css`
+  * `styles/HeroSection.module.css`
+  * etc.
+
+**Animação com Intersection Observer:**
+No componente `ProgramCard`, implementamos uma funcionalidade avançada de UI. O card só aparece (efeito *fade-in-up*) quando o usuário rola a página até ele.
+
+```javascript
+// components/program-cards.js
+useEffect(() => {
+  const observer = new IntersectionObserver((entries) => {
+    // Quando o elemento entra na tela...
+    if (entry.isIntersecting) {
+      setIsVisible(true) // Ativa a classe CSS de animação
+    }
+  })
+  // ...
+}, [])
+```
+
+Essa estrutura torna o site não apenas funcional, mas visualmente agradável e moderno, utilizando os recursos nativos do React dentro do ecossistema Next.js.
+
